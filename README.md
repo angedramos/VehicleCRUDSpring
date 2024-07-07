@@ -19,7 +19,7 @@ git clone https://github.com/tu-usuario/VehicleCRUDSpring
 ```
 ### 2. Configurar la Base de datos
 
-Asegúrate de tener MySQL instalado y ejecuta el script [ScriptDatabaseCreaction](https://github.com/angedramos/VehicleCRUDSpring/blob/main/ScriptVehiclesDatabase.sql) proporcionado para configurar la base de datos "vehicles".
+Asegúrate de tener MySQL instalado y ejecuta el script [ScriptDatabaseCreaction](https://github.com/angedramos/VehicleCRUDSpring/blob/master/ScriptVehiclesDatabase.sql) proporcionado para configurar la base de datos "vehicles".
 
 ### 3. Configurar el archivo "application.properties"
 
