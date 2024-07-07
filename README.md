@@ -15,7 +15,7 @@ Sigue estos pasos para instalar y configurar la aplicación:
 
 ### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/tu-usuario/VehicleCRUDSpring
+git clone https://github.com/angedramos/VehicleCRUDSpring
 ```
 ### 2. Configurar la Base de datos
 
