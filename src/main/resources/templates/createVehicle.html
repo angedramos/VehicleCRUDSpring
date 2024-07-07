@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-content-width, initial-scale=1">
+    <title>Create Vehicles</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+        }
+        .navbar, footer {
+            background-color: #343a40;
+            color: white;
+        }
+        .content {
+            flex: 1;
+        }
+        footer {
+            padding: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Vehicle Management</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+	<div th:if="${errorMessage}" class="alert alert-danger">
+  	    <p th:text="${errorMessage}" style="text-align: center; font-weight: bold;"></p>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 mx-auto rounded border p-4 m-4">
+				<h2 class="text-center mb-2">New Vehicle</h2>
+				<p class="text-center mb-5">Please fill in the form to create a new vehicle. Note that <b>all fields are required.</b></p>
+				<form method="post" enctype="multipart/form-data" th:object="${vehicleDto}">
+					<div class="row mb-3">
+						<label class="col-sm-4 col-form-label">Vehicle Make</label>
+						<div class="col-sm-8">
+							<input class="form-control" th:field="${vehicleDto.vehicleBrand}">
+							<p th:if="${#fields.hasErrors('vehicleBrand')}" th:errorclass="text-danger"
+							th:errors="${vehicleDto.vehicleBrand}"></p>
+						</div>
+					</div>
+					
+					<div class="row mb-3">
+						<label class="col-sm-4 col-form-label">Vehicle Model</label>
+						<div class="col-sm-8">
+							<input class="form-control" th:field="${vehicleDto.vehicleModel}">
+							<p th:if="${#fields.hasErrors('vehicleModel')}" th:errorclass="text-danger"
+							th:errors="${vehicleDto.vehicleModel}"></p>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<label class="col-sm-4 col-form-label">Vehicle License_Plate</label>
+						<div class="col-sm-8">
+							<input class="form-control" th:field="${vehicleDto.vehicleLicensePlate}">
+							<p th:if="${#fields.hasErrors('vehicleLicensePlate')}" th:errorclass="text-danger"
+							th:errors="${vehicleDto.vehicleLicensePlate}"></p>
+						</div>
+					</div>		
+								
+					<div class="row mb-3">
+						<label class="col-sm-4 col-form-label">Vehicle Color</label>
+						<div class="col-sm-8">
+							<input class="form-control" th:field="${vehicleDto.vehicleColor}">
+							<p th:if="${#fields.hasErrors('vehicleColor')}" th:errorclass="text-danger"
+							th:errors="${vehicleDto.vehicleColor}"></p>
+						</div>
+					</div>	
+					
+					<div class="row mb-3">
+						<label class="col-sm-4 col-form-label">Vehicle Year</label>
+						<div class="col-sm-8">
+							<input class="form-control" th:field="${vehicleDto.vehicleYear}">
+							<p th:if="${#fields.hasErrors('vehicleYear')}" th:errorclass="text-danger"
+							th:errors="${vehicleDto.vehicleYear}"></p>
+						</div>
+					</div>	
+					
+					<div class="row">
+						<div class="offset-sm-4 col-sm-4 d-grid">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+						<div class="col-sm-4 d-grid">
+							<a class="btn btn-outline-primary" href="/vehicles" role="button">Cancel</a>
+						</div>
+					</div>			
+				</form>
+			</div>
+		</div>
+	</div>
+	<footer class="text-center text-lg-start mt-auto">
+      <div class="text-center">
+        © 2024 Angel Ramos Mena
+      </div>
+    </footer>
+</body>
+</html>

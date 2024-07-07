@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vehicles</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+        }
+        .navbar, footer {
+            background-color: #343a40;
+            color: white;
+        }
+        .content {
+            flex: 1;
+        }
+        footer {
+            padding: 1rem 0;
+        }
+    </style>
+  </head>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Vehicle Management</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Vehicles List</h1>
+        <div class="d-flex justify-content-center mb-4">
+            <div class="btn-group" role="group">
+                <a class="btn  btn-outline-primary mr-2" href="vehicles/addVehicle">Add Vehicle</a>
+                <a class="btn btn-outline-primary ml-2" href="vehicles/searchVehicle">Search Vehicle(s)</a>
+            </div>
+        </div>		
+        <div th:if="${successMessage}" class="alert alert-success">
+        	<p th:text="${successMessage}" style="text-align: center; font-weight: bold;">></p>
+    	</div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    
+                    <th><a th:text="'Make'" th:href="@{/vehicles(sortBy='vehicleBrand', sortDir=${sortDir}, page=${vehiclePage.number})}"></a></th>
+                    <th><a th:text="'Model'" th:href="@{/vehicles(sortBy='vehicleModel', sortDir=${sortDir}, page=${vehiclePage.number})}"></a></th>
+                    <th><a th:text="'LicensePlate'" th:href="@{/vehicles(sortBy='vehicleLicensePlate', sortDir=${sortDir}, page=${vehiclePage.number})}"></a></th>
+                    <th><a th:text="'Color'" th:href="@{/vehicles(sortBy='vehicleColor', sortDir=${sortDir}, page=${vehiclePage.number})}"></a></th>
+                    <th><a th:text="'Year'" th:href="@{/vehicles(sortBy='vehicleYear', sortDir=${sortDir}, page=${vehiclePage.number})}"></a></th>
+                    <th><a th:text="'Actions'"></a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="vehicle : ${vehiclePage.content}">
+                    <td th:text="${vehicle.vehicleBrand}"></td>
+                    <td th:text="${vehicle.vehicleModel}"></td>
+                    <td th:text="${vehicle.vehicleLicensePlate}"></td>
+                    <td th:text="${vehicle.vehicleColor}"></td>
+                    <td th:text="${vehicle.vehicleYear}"></td>
+                    <td>
+						<a class="btn btn-secondary btn-sm" th:href="@{/vehicles/edit/(id=${vehicle.id})}">Edit Vehicle</a>
+						<a class="btn btn-danger ml-2 btn-sm" th:href="@{/vehicles/delete/(id=${vehicle.id})}" onclick="return confirm('Are you sure?')">Delete Vehicle</a>
+					</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${vehiclePage.hasPrevious()} ? '' : 'disabled'">
+                    <a class="page-link" th:href="@{/vehicles(page=${vehiclePage.number - 1}, size=${vehiclePage.size}, sortBy=${sortBy}, sortDir=${sortDir})}">Previous</a>
+                </li>
+                <li class="page-item" th:each="i : ${#numbers.sequence(0, vehiclePage.totalPages - 1)}" th:classappend="${i == vehiclePage.number} ? 'active' : ''">
+                    <a class="page-link" th:href="@{/vehicles(page=${i}, size=${vehiclePage.size}, sortBy=${sortBy}, sortDir=${sortDir})}" th:text="${i + 1}"></a>
+                </li>
+                <li class="page-item" th:classappend="${vehiclePage.hasNext()} ? '' : 'disabled'">
+                    <a class="page-link" th:href="@{/vehicles(page=${vehiclePage.number + 1}, size=${vehiclePage.size}, sortBy=${sortBy}, sortDir=${sortDir})}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+	<footer class="text-center text-lg-start mt-auto">
+      <div class="text-center">
+        © 2024 Angel Ramos Mena
+      </div>
+    </footer>
+    <!-- Bootstrap JS and dependencies (optional) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
