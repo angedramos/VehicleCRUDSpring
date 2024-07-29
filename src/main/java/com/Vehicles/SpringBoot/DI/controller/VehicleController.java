@@ -195,11 +195,11 @@ import jakarta.validation.Valid;
 		    	if(result.hasErrors()) {
 		    		return "editVehicle";
 		    	}
-		        if (vRepo.existsByVehicleLicensePlate(vehicleDto.getVehicleLicensePlate())) {
+		        if (vRepo.existsByVehicleLicensePlateAndIdNot(vehicleDto.getVehicleLicensePlate(), id)) {
 		            model.addAttribute("vehicleDto", vehicleDto);
-		            model.addAttribute("errorMessage", "License Plate: "+vehicleDto.getVehicleLicensePlate()+" already exists");
-		            return "editVehicle";
-		        }
+		           model.addAttribute("errorMessage", "License Plate: "+vehicleDto.getVehicleLicensePlate()+" already exists");
+		           return "editVehicle";
+		        }	
 
 	            vehicle.setVehicleBrand(vehicleDto.getVehicleBrand());
 	            vehicle.setVehicleModel(vehicleDto.getVehicleModel());
@@ -208,7 +208,7 @@ import jakarta.validation.Valid;
 	            vehicle.setVehicleYear(vehicleDto.getVehicleYear());
 
 	            vRepo.save(vehicle);
-	            redirectAttributes.addFlashAttribute("successMessage", "Vehicle with License Plate: "+vehicleDto.getVehicleLicensePlate()+"was edited successfully");
+	            redirectAttributes.addFlashAttribute("successMessage", "Vehicle with License Plate: "+vehicleDto.getVehicleLicensePlate()+" was edited successfully");
 	        } catch (Exception ex) {
 	            System.out.println("Exception: "+ex.getMessage());
 	        }

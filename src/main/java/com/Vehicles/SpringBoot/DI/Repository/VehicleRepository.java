@@ -46,10 +46,18 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long>{
 	  Page<Vehicle> findByVehicleBrand(String vehicleBrand, Pageable pageable);
 	  
 	  /**
-	     * Verifica si un vehículo con la placa especificada ya existe.
+	     * Verifica si un vehículo con la placa especificada ya existe al momento de agregar.
 	     *
 	     * @param vehicleLicensePlate la placa del vehículo a verificar
 	     * @return true si un vehículo con la placa especificada ya existe, false de lo contrario
 	     */
 	  boolean existsByVehicleLicensePlate(String vehicleLicensePlate);
+	  
+	  /**
+	     * Verifica si un vehículo con la placa especificada ya existe al momento de editar.
+	     *
+	     * @param vehicleLicensePlate la placa del vehículo a verificar
+	     * @return true si un vehículo con la placa especificada ya existe, false de lo contrario
+	     */
+	  boolean existsByVehicleLicensePlateAndIdNot(String vehicleLicensePlate, Long id);
 }

@@ -219,7 +219,7 @@ public class VehicleControllerTest {
                 .flashAttr("vehicleDto", vehicleDto))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/vehicles"))
-                .andExpect(flash().attribute("successMessage", "Vehicle with License Plate: "+vehicleDto.getVehicleLicensePlate()+"was edited successfully"));
+                .andExpect(flash().attribute("successMessage", "Vehicle with License Plate: "+vehicleDto.getVehicleLicensePlate()+" was edited successfully"));
 
         verify(vRepo, times(1)).findById(vehicleId);
         verify(vRepo, times(1)).save(any(Vehicle.class));
